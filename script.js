@@ -1,28 +1,35 @@
-let operand1 = 1;
-let operand2 = 2;
-let operator = "";
-
-const add = () => {
-    operator = "+";
+const add = (operand1, operand2) => {
     return operand1 + operand2;
 }
 
-const subtract = () => {
-    operator = "-";
+const subtract = (operand1, operand2) => {
     return operand1 - operand2;
 }
 
-const multiply = () => {
-    operator = "*";
+const multiply = (operand1, operand2) => {
     return operand1 * operand2;
 }
 
-const divide = () => {
-    operator = "/";
+const divide = (operand1, operand2) => {
     return operand1 / operand2;
 }
 
-console.log(add());
-console.log(subtract());
-console.log(multiply());
-console.log(divide())
+const operate = (operator, operand1, operand2) => {
+    switch (operator) {
+        case "+":
+            return add(operand1, operand2);
+        case "-":
+            return subtract(operand1, operand2);
+        case "*":
+            return multiply(operand1, operand2);
+        case "/":
+            return divide(operand1, operand2);
+    }
+};
+
+
+
+console.log(operate("+",1,4));
+console.log(operate("-",1,4));
+console.log(operate("*",1,4));
+console.log(operate("/",1,4));
