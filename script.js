@@ -60,15 +60,19 @@ operatorBtns.forEach(operator => {
         operand1 = parseFloat(display.textContent);
         operation = operator.value;
         display.textContent = "0";
-
+        
         //to-do: need to handle cases where user clicks the operator more than once
     });
 });
 
 equalsBtn.addEventListener("click", () => {
-    operand2 = parseFloat(display.textContent);
-    display.textContent = operate(operation, operand1, operand2);
-    clearValues();
+    if (!operation) {
+        display.textContent = "0";
+    } else {
+        operand2 = parseFloat(display.textContent);
+        display.textContent = operate(operation, operand1, operand2);
+        clearValues();
+    }
 });
 
 actionBtns.forEach(action => {
