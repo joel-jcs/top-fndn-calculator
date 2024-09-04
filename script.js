@@ -27,6 +27,15 @@ const operate = (operator, operand1, operand2) => {
     }
 };
 
+let operand1 = 0;
+let operand2 = 0;
+let operation = "";
+const clearValues = () => {
+    operand1 = 0;
+    operand2 = 0;
+    operation = "";
+}
+
 const display = document.getElementById("display");
 const numberBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -48,14 +57,25 @@ numberBtns.forEach(number => {
 
 operatorBtns.forEach(operator => {
     operator.addEventListener("click", () => {
-        
+        operand1 = parseFloat(display.textContent);
+        operation = operator.value;
+        display.textContent = "0";
+
+        //to-do: need to handle cases where user clicks the operator more than once
     });
+});
+
+equalsBtn.addEventListener("click", () => {
+    operand2 = parseFloat(display.textContent);
+    display.textContent = operate(operation, operand1, operand2);
+    clearValues();
 });
 
 actionBtns.forEach(action => {
     action.addEventListener("click", () => {
         if (action.id === "clear") {
             display.textContent = "0";
+            clearValues();
         } else {
             if (display.textContent.length > 1) {
                 let displayArr = display.textContent.split("");
