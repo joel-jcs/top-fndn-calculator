@@ -51,10 +51,13 @@ const clearValues = () => {
 const showResult = () => {
     operand2 = parseFloat(display.textContent);
     result = operate(operation, operand1, operand2);
-    display.textContent = result;
+    operand1 = result;
+    display.textContent = operand1;
+    replaceDisplay = true;
 }
 
 let replaceDisplay = false;
+let decimalFlag = false;
 // add numbers to display
 numberBtns.forEach(number => {
     const MAX_DIGITS = 14;
@@ -70,6 +73,7 @@ numberBtns.forEach(number => {
             } else {
                 display.textContent += number.value;
             }
+            //after i press an operator, pressing the decimal should change display to "0."
         }
     });
 });
@@ -82,6 +86,7 @@ operatorBtns.forEach(operator => {
             replaceDisplay = true;
         } else {
             showResult();
+            operation = operator.value;
         }
     });
 });
@@ -115,11 +120,9 @@ actionBtns.forEach(action => {
 
 decimalBtn.addEventListener("click", () => {
     const decimal = decimalBtn.value;
-    //if displayArr doesnt contain decimal already, add decimal.value
-        let displayArr = display.textContent.split("");
-        if (!displayArr.includes(decimal)) {
-            displayArr.push(decimal);
-            display.textContent = displayArr.join("");
-        }
-    //else don't add it
+    let displayArr = display.textContent.split("");
+    if (!displayArr.includes(decimal)) {
+        displayArr.push(decimal);
+        display.textContent = displayArr.join("");
+    }
 });
