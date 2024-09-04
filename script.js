@@ -1,9 +1,12 @@
 const display = document.getElementById("display");
+const clearBtn = document.getElementById("clear");
+const backspaceBtn = document.getElementById("backspace");
 const numberBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 const equalsBtn = document.getElementById("equals");
 const actionBtns = document.querySelectorAll(".action");
-const decimalBtn =document.getElementById("decimal")
+const toggleSignBtn = document.getElementById("toggle-sign");
+const decimalBtn =document.getElementById("decimal");
 
 const add = (operand1, operand2) => {
     return operand1 + operand2;
@@ -122,6 +125,18 @@ actionBtns.forEach(action => {
     });
 });
 
+toggleSignBtn.addEventListener("click", () => {
+    let displayArr = display.textContent.split("");
+
+    if (displayArr[0] === "-") {
+        displayArr.shift();
+        display.textContent = displayArr.join("");
+    } else {
+        displayArr.unshift("-");
+        display.textContent = displayArr.join("");
+    }
+});
+
 decimalBtn.addEventListener("click", () => {
     const decimal = decimalBtn.value;
     let displayArr = display.textContent.split("");
@@ -134,5 +149,44 @@ decimalBtn.addEventListener("click", () => {
             displayArr.push(decimal);
             display.textContent = displayArr.join("");
         }
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    // Check if the key pressed is a number key
+    if (!isNaN(key) && key !== " ") {
+        const numberButton = document.querySelector(`.number[value="${key}"]`);
+        if (numberButton) {
+            numberButton.click();
+        }
+    }
+
+    // Check if the key pressed is an operator key
+    if (["+", "-", "*", "/"].includes(key)) {
+        const operatorButton = document.querySelector(`.operator[value="${key}"]`);
+        if (operatorButton) {
+            operatorButton.click();
+        }
+    }
+
+    // Check if the key pressed is the equals key
+    if (key === "Enter" || key === "=") {
+        equalsBtn.click();
+    }
+
+    // Check if the key pressed is the decimal key
+    if (key === ".") {
+        decimalBtn.click();
+    }
+
+    // Check if the key pressed is the clear key
+    if (key === "Escape") {
+        clearBtn.click();
+    }
+
+    if (key === "Backspace") {
+        backspaceBtn.click();
     }
 });
