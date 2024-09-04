@@ -1,3 +1,9 @@
+const display = document.getElementById("display");
+const numberBtns = document.querySelectorAll(".number");
+const operatorBtns = document.querySelectorAll(".operator");
+const equalsBtn = document.getElementById("equals");
+const actionBtns = document.querySelectorAll(".action");
+
 const add = (operand1, operand2) => {
     return operand1 + operand2;
 }
@@ -23,7 +29,11 @@ const operate = (operator, operand1, operand2) => {
         case "*":
             return multiply(operand1, operand2);
         case "/":
-            return divide(operand1, operand2);
+            if (operand2 !== "0") {
+                return display.textContent = "3rr0r D1V-0";
+            } else {
+                return divide(operand1, operand2);                
+            }
     }
 };
 
@@ -35,12 +45,6 @@ const clearValues = () => {
     operand2 = 0;
     operation = "";
 }
-
-const display = document.getElementById("display");
-const numberBtns = document.querySelectorAll(".number");
-const operatorBtns = document.querySelectorAll(".operator");
-const equalsBtn = document.getElementById("equals");
-const actionBtns = document.querySelectorAll(".action");
 
 // add numbers to display
 numberBtns.forEach(number => {
