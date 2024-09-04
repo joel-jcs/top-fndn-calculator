@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom:40px;
+}
+
+#calculator {
+    width: 400px;
+    height: 600px;
+    background-color: #9d9d9d;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#display {
+    width: 100%;
+    height: 100%;
+    margin-top:20px;
+    background-color: #a0c1c1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+    font-size:1.8rem;
+}
+
+#keys-container {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 4fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+#action-container {
+    grid-column: 1 / -1;
+    grid-row: 1 / 1;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+
+.action {
+    width:100%;
+    color:rgb(255, 99, 99);
+    font-weight: bolder;
+}
+
+#number-container {
+    grid-column: 1 / 2;
+    grid-row: 2 / -1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.number {
+    background-color: #686868;
+}
+
+#operator-container {
+    grid-column: 2 / -1;
+    grid-row: 2 / -1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.operator {
+    width: 100%;
+    color:rgb(14, 237, 14);
+    font-weight: bolder;
+}
+
+#equals {
+    background-color: rgb(14, 237, 14);
+    color:white;
+}
+
+#equals:active {
+    background-color: rgb(1, 125, 1);
+}
+
+button {
+    width: 60px;
+    height:60px;
+    background-color: #858585;
+    color: white;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 1);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #525252;
+}
