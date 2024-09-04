@@ -57,9 +57,13 @@ actionBtns.forEach(action => {
         if (action.id === "clear") {
             display.textContent = "0";
         } else {
-            let displayArr = display.textContent.split("");
-            displayArr.pop();
-            display.textContent = displayArr.join("");
+            if (display.textContent.length > 1) {
+                let displayArr = display.textContent.split("");
+                displayArr.pop();
+                display.textContent = displayArr.join("");
+            } else {
+                display.textContent = "0";
+            }
         }
     });
 });
