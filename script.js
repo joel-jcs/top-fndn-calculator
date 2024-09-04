@@ -54,6 +54,7 @@ const showResult = () => {
     display.textContent = result;
 }
 
+let replaceDisplay = false;
 // add numbers to display
 numberBtns.forEach(number => {
     const MAX_DIGITS = 14;
@@ -61,9 +62,14 @@ numberBtns.forEach(number => {
         if (display.textContent === "0") {
             display.textContent = "";
         }
-        
+
         if (display.textContent.length < MAX_DIGITS) {
-            display.textContent += number.value;
+            if (replaceDisplay) {
+                display.textContent = number.value;
+                replaceDisplay = false;
+            } else {
+                display.textContent += number.value;
+            }
         }
     });
 });
@@ -73,7 +79,7 @@ operatorBtns.forEach(operator => {
         if (!operation) {
             operand1 = parseFloat(display.textContent);
             operation = operator.value;
-            display.textContent = "0";
+            replaceDisplay = true;
         } else {
             showResult();
         }
