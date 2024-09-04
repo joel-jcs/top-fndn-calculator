@@ -53,12 +53,11 @@ const showResult = () => {
     result = operate(operation, operand1, operand2);
     operand1 = result;
     display.textContent = operand1;
-    replaceDisplay = true;
+    isOperatorActive = true;
 }
 
-let replaceDisplay = false;
-let decimalFlag = false;
-// add numbers to display
+let isOperatorActive = false;
+let isDecimalActive = false;
 numberBtns.forEach(number => {
     const MAX_DIGITS = 14;
     number.addEventListener("click", () => {
@@ -67,13 +66,18 @@ numberBtns.forEach(number => {
         }
 
         if (display.textContent.length < MAX_DIGITS) {
-            if (replaceDisplay) {
-                display.textContent = number.value;
-                replaceDisplay = false;
+            if (isOperatorActive) {
+                if (isDecimalActive) {
+                    display.textContent += number.value;    
+                    isOperatorActive = false;
+                    isDecimalActive = false;
+                } else {
+                    display.textContent = number.value;
+                    isOperatorActive = false;
+                }
             } else {
                 display.textContent += number.value;
             }
-            //after i press an operator, pressing the decimal should change display to "0."
         }
     });
 });
@@ -83,7 +87,7 @@ operatorBtns.forEach(operator => {
         if (!operation) {
             operand1 = parseFloat(display.textContent);
             operation = operator.value;
-            replaceDisplay = true;
+            isOperatorActive = true;
         } else {
             showResult();
             operation = operator.value;
@@ -121,8 +125,14 @@ actionBtns.forEach(action => {
 decimalBtn.addEventListener("click", () => {
     const decimal = decimalBtn.value;
     let displayArr = display.textContent.split("");
-    if (!displayArr.includes(decimal)) {
-        displayArr.push(decimal);
-        display.textContent = displayArr.join("");
+
+    if (isOperatorActive) {
+        display.textContent = "0.";
+        isDecimalActive = true;
+    } else {
+        if (!displayArr.includes(decimal)) {
+            displayArr.push(decimal);
+            display.textContent = displayArr.join("");
+        }
     }
 });
